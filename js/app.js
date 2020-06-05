@@ -1,6 +1,8 @@
 'use strict;'
 
 const imageArray = [];
+let $photoTemplate = $('#photo-template');
+let $title = $('#title');
 
 //Take whats in the JSON file and run it through a constructor function for each object.
 //Create Constructor function with proprties listed below
@@ -11,8 +13,7 @@ function ImageConstructor (description,horns,image_url,keyword,title) {
     this.image_url = image_url;
     this.keyword = keyword;
     this.title = title;
-    
-    imageArray.push(this)
+     
 };
 
 //We need to us the $.ajax() command to read the provided JSON file.
@@ -23,13 +24,29 @@ $.ajax('../data/page-1.json').then(data => {
 });
 
 
-console.log(imageArray);
+// console.log(imageArray);
+ImageConstructor.prototype.render = function(){
+// let $templateClone = $('<div></div>');
+let $templateClone = $phototemplate.clone();
+$templateClone.find('h2').text(this.title);
+}
 
-// description: "A unicorn and a narwhal nuzzling their horns"
-// horns: 1
-// image_url: "http://3.bp.blogspot.com/_DBYF1AdFaHw/TE-f0cDQ24I/AAAAAAAACZg/l-FdTZ6M7z8/s1600/Unicorn_and_Narwhal_by_dinglehopper.jpg"
-// keyword: "narwhal"
-// title: "UniWhal"
+imageArray.forEach( obj =>{
+  let imgToRender = obj.render();
+  $('main').append(imgToRender);
+
+})
+// imageArray.forEach( (value, idx) => {
+//     $title.text(value.title);
+//     $photoTemplate.append($thisTitle);
+//     console.log(value.name);
+//     });
+
+/* <section id="photo-template"> <!--use this to grab the section-->
+    <h2 id="title"></h2> <!--title goes here-->
+        <img src="" alt=""> <!--link goes here-->
+    <p></p> <!--description goes here-->
+</section> */
 
 
 
@@ -44,3 +61,21 @@ console.log(imageArray);
 //--Description
 //--KeyWord
 //--Horns
+
+// ----------How we did it in class------------ EXAMPLE ----------------
+// $.ajax( './pets.json').then( function(data) {
+
+//     console.log('Got the pets', data);
+  
+//     data.forEach((pet) => {
+  
+//       // copy the template
+//       // Put in the words
+//       // append that to the ul
+//       let $thisPet = $petTemplate.clone();
+//       $thisPet.find('span').text(pet.name);// .parent().removeClass('pet-template');
+//       $thisPet.removeClass('pet-template');
+//       $petsContainer.append($thisPet);
+  
+//       // $petsContainer.append(`<li><span>${pet}</span></li>`);
+//     });
