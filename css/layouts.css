@@ -47,3 +47,7 @@ select{
 #gallery{
     margin-left: 3%;
 }
+footer{
+  display: inline-block;
+  text-align: center;
+}

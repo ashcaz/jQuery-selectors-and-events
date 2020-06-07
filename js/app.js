@@ -1,12 +1,19 @@
 'use strict;'
 
-const imageArray = [];
+const imageArray1 = [];
+const imageArray2 = [];
+
 let $photoTemplateDiv = $('#photo-template');
 let $gallery = $('#gallery');
 let $dropDown = $('#dropdown');
 let $dropdownTemplate = $('#dropdown-template');
 
-
+//Mustache Render Example{{{{{{
+function renderHello() {
+  var template = document.getElementById('template').innerHTML;
+  var rendered = Mustache.render(template, { name: 'Luke' });
+  document.getElementById('target').innerHTML = rendered;
+}
 
 //Create Constructor function with proprties listed below
 function ImageConstructor (description,horns,image_url,keyword,title) {
@@ -17,8 +24,20 @@ function ImageConstructor (description,horns,image_url,keyword,title) {
   this.title = title;
 
   this.imageToRender = this.render();
-  imageArray.push(this);
+  imageArray1.push(this);
 }
+
+function ImageConstructorTwo (description,horns,image_url,keyword,title) {
+  this.description = description;
+  this.horns = horns;
+  this.image_url = image_url;
+  this.keyword = keyword;
+  this.title = title;
+
+  // this.imageToRender = this.render();
+  imageArray2.push(this);
+}
+
 
 //Take whats in the JSON file and run it through a constructor function for each object.
 $.ajax('../data/page-1.json').then(data => {
@@ -26,10 +45,18 @@ $.ajax('../data/page-1.json').then(data => {
     new ImageConstructor (obj.description,obj.horns,obj.image_url,obj.keyword,obj.title);
     // console.log(obj.keyword);
   })
-  renderDropdown(imageArray);
-  console.log(imageArray);
+  renderDropdown(imageArray1);
+  console.log(imageArray1);
 });
 
+$.ajax('../data/page-2.json').then(data => {
+  data.forEach( obj => {
+    new ImageConstructorTwo (obj.description,obj.horns,obj.image_url,obj.keyword,obj.title);
+    // console.log(obj.keyword);
+  })
+  renderDropdown(imageArray2);
+  console.log(imageArray2);
+});
 
 //create a prototype function that renders the info to the DOM
 ImageConstructor.prototype.render = function(){
@@ -48,7 +75,7 @@ function renderDropdown (array){
     //populate all keywords into the drop down
     if (!newArray.includes(obj.keyword)){
       newArray.push(obj.keyword);
-      console.log(newArray);
+      // console.log(newArray);
     }
   });
   newArray.forEach( keyword => {
@@ -69,7 +96,8 @@ $dropDown.on('change', filter);
 
 function filter(){
   let keyword = $(this).val();
-  console.log(keyword);
   $('.photo').hide();
   $(`.${keyword}`).fadeIn();
 }
+
+
