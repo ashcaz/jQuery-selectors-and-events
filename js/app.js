@@ -43,12 +43,19 @@ ImageConstructor.prototype.render = function(){
 }
 
 function renderDropdown (array){
+  const newArray = [];
   array.forEach( obj => {
     //populate all keywords into the drop down
+    if (!newArray.includes(obj.keyword)){
+      newArray.push(obj.keyword);
+      console.log(newArray);
+    }
+  });
+  newArray.forEach( keyword => {
     let $dropdownClone = $dropdownTemplate.clone();
     $dropdownClone.removeAttr('id');
-    $dropdownClone.attr('value', obj.keyword);
-    $dropdownClone.text(obj.keyword);
+    $dropdownClone.attr('value', keyword);
+    $dropdownClone.text(keyword);
     $dropDown.append($dropdownClone);
   });
 }
