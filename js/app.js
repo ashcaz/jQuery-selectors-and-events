@@ -6,7 +6,12 @@ let $gallery = $('#gallery');
 let $dropDown = $('#dropdown');
 let $dropdownTemplate = $('#dropdown-template');
 
-
+//Mustache Example {{{{{{
+function renderHello() {
+  var template = document.getElementById('template').innerHTML;
+  var rendered = Mustache.render(template, { name: 'Luke' });
+  document.getElementById('target').innerHTML = rendered;
+}
 
 //Create Constructor function with proprties listed below
 function ImageConstructor (description,horns,image_url,keyword,title) {
