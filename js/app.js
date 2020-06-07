@@ -6,7 +6,7 @@ let $gallery = $('#gallery');
 let $dropDown = $('#dropdown');
 let $dropdownTemplate = $('#dropdown-template');
 
-//Mustache Example {{{{{{
+//Mustache Render Example{{{{{{
 function renderHello() {
   var template = document.getElementById('template').innerHTML;
   var rendered = Mustache.render(template, { name: 'Luke' });
