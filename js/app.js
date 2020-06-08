@@ -40,7 +40,7 @@ function ImageConstructorTwo (description,horns,image_url,keyword,title) {
 
 
 //Take whats in the JSON file and run it through a constructor function for each object.
-$.ajax('/data/page-1.json').then(data => {
+$.ajax('./data/page-1.json').then(data => {
   data.forEach( obj => {
     new ImageConstructor (obj.description,obj.horns,obj.image_url,obj.keyword,obj.title);
     // console.log(obj.keyword);
@@ -49,7 +49,7 @@ $.ajax('/data/page-1.json').then(data => {
   console.log(imageArray1);
 });
 
-$.ajax('/data/page-2.json').then(data => {
+$.ajax('./data/page-2.json').then(data => {
   data.forEach( obj => {
     new ImageConstructorTwo (obj.description,obj.horns,obj.image_url,obj.keyword,obj.title);
     // console.log(obj.keyword);
