@@ -1,6 +1,6 @@
 'use strict;'
 
-const imageArray1 = [];
+const imageArray = [];
 const imageArray2 = [];
 
 let $photoTemplateDiv = $('#photo-template');
@@ -24,7 +24,7 @@ function ImageConstructor (description,horns,image_url,keyword,title) {
   this.title = title;
 
   this.imageToRender = this.render();
-  imageArray1.push(this);
+  imageArray.push(this);
 }
 
 function ImageConstructorTwo (description,horns,image_url,keyword,title) {
@@ -45,8 +45,8 @@ $.ajax('../data/page-1.json').then(data => {
     new ImageConstructor (obj.description,obj.horns,obj.image_url,obj.keyword,obj.title);
     // console.log(obj.keyword);
   })
-  renderDropdown(imageArray1);
-  console.log(imageArray1);
+  renderDropdown(imageArray);
+  console.log(imageArray);
 });
 
 $.ajax('../data/page-2.json').then(data => {
